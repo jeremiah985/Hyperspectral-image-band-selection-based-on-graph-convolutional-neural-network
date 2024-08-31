@@ -61,7 +61,7 @@ def post_proC(C, K, d, ro):
     # C: coefficient matrix, K: number of clusters, d: dimension of each subspace
     n = C.shape[0]
     C = 0.5 * (C + C.T)
-    # C = C - np.diag(np.diag(C)) + np.eye(n, n)  # good for coil20, bad for orl
+    C = C - np.diag(np.diag(C)) + np.eye(n, n)  # good for coil20, bad for orl
     r = d * K + 1
     U, S, _ = svds(C, r, v0=np.ones(n))
     U = U[:, ::-1]

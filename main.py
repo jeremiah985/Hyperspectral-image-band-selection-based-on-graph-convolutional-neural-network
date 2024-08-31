@@ -26,10 +26,12 @@ class Conv2dSamePad(nn.Module):
         self.stride = stride if type(stride) in [list, tuple] else [stride, stride]
 
     def forward(self, x):
-        in_height = x.size(2)
-        in_width = x.size(3)
+        in_height = x.size(2)#输入的张量高度
+        in_width = x.size(3)#宽度
         out_height = math.ceil(float(in_height) / float(self.stride[0]))
+        #经过卷积这个操作后输出的高度
         out_width = math.ceil(float(in_width) / float(self.stride[1]))
+        #卷积后输出的
         pad_along_height = ((out_height - 1) * self.stride[0] + self.kernel_size[0] - in_height)
         pad_along_width = ((out_width - 1) * self.stride[1] + self.kernel_size[1] - in_width)
         pad_top = math.floor(pad_along_height / 2)
@@ -205,6 +207,9 @@ if __name__ == "__main__":
         data = sio.loadmat('datasets/COIL20.mat')
         x, y = data['fea'].reshape((-1, 1, 32, 32)), data['gnd']
         y = np.squeeze(y - 1)  # y in [0, 1, ..., K-1]
+
+        print("x的形状：",x.shape)
+        print("y的形状：",y.shape)
 
         # network and optimization parameters
         num_sample = x.shape[0]

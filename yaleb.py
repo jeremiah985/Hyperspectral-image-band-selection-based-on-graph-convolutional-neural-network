@@ -189,6 +189,7 @@ if __name__ == "__main__":
     parser.add_argument('--save-dir', default='results')
     args = parser.parse_args()
     print(args)
+    
     if not os.path.exists(args.save_dir):
         os.makedirs(args.save_dir)
 
